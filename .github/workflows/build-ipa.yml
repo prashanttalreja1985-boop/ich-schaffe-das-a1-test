@@ -1,19 +1,17 @@
 name: Build Ich schaffe das A1 IPA
-
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'ich-schaffe-das-a1-source.zip'
+      - 'ich-schaffe-das-a1-source-v2.zip'
       - '.github/workflows/build-ipa.yml'
-
 jobs:
   ios:
     runs-on: macos-15-intel
     steps:
       - uses: actions/checkout@v4
       - name: Unpack app source
-        run: unzip -q ich-schaffe-das-a1-source.zip
+        run: unzip -q ich-schaffe-das-a1-source-v2.zip
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -21,6 +19,9 @@ jobs:
       - name: Install dependencies
         working-directory: learning_app
         run: flutter pub get
+      - name: Validate course and video coverage
+        working-directory: learning_app
+        run: node tool/validate_course.js
       - name: Test
         working-directory: learning_app
         run: flutter test
@@ -34,9 +35,9 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/
           cd build/ipa
-          zip -qry Ich-schaffe-das-A1-unsigned.ipa Payload
-          unzip -tq Ich-schaffe-das-A1-unsigned.ipa
+          zip -qry Ich-schaffe-das-A1-v2-unsigned.ipa Payload
+          unzip -tq Ich-schaffe-das-A1-v2-unsigned.ipa
       - uses: actions/upload-artifact@v4
         with:
-          name: ich-schaffe-das-a1-unsigned-ipa
-          path: learning_app/build/ipa/Ich-schaffe-das-A1-unsigned.ipa
+          name: ich-schaffe-das-a1-v2-unsigned-ipa
+          path: learning_app/build/ipa/Ich-schaffe-das-A1-v2-unsigned.ipa
