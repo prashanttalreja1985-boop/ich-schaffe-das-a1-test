@@ -8,7 +8,7 @@ Enter a profile name the first time, or tap a saved name to continue. The app sa
 
 ## YouTube Reels
 
-Enter comma-separated interests such as German, travel, or football. The toggle controls whether a session includes videos. With Reels enabled, sessions begin with three bundled public YouTube Shorts; another appears after every four learning cards. Videos play inside the card. They may repeat, and some creators prevent embedding. This is a small test catalog, not your YouTube feed or a live keyword search. No YouTube account or API key is needed.
+Enter comma-separated interests such as travel, football, or cooking. The toggle controls whether a session includes videos. With Reels enabled, sessions begin with three bundled public YouTube Shorts; another appears after every four learning cards. Only videos matching an entered interest are shown. An empty interest list or a keyword with no catalog match shows no videos, so the app will not fall back to German-learning clips. Videos play inside the card. They may repeat, and some creators prevent embedding. This is a small test catalog, not your YouTube feed or a live keyword search. No YouTube account or API key is needed.
 
 ## A1+ Revision transcript coverage
 
@@ -18,11 +18,11 @@ The app lessons use original instructional wording and examples rather than copi
 
 ## Install the test IPA
 
-Open the [v8 build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v8-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v8-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
+Open the [v9 build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v9-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v9-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
 
 ## Source and database
 
-The [v8 source ZIP](ich-schaffe-das-a1-source-v8.zip) contains the Flutter app, separately bundled A1 and A1+ Revision courses, Shorts catalog, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. The IPA reads the published course and lexicon from Supabase, falls back to bundled data offline, and uses no account screen. Progress syncs anonymously when available and otherwise stays on the device.
+The [v9 source ZIP](ich-schaffe-das-a1-source-v9.zip) contains the Flutter app, separately bundled A1 and A1+ Revision courses, Shorts catalog, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. The IPA reads the published course and lexicon from Supabase, falls back to bundled data offline, and uses no account screen. Progress syncs anonymously when available and otherwise stays on the device.
 
 ## Card interactions
 
