@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'ich-schaffe-das-a1-source-v7.zip'
+      - 'ich-schaffe-das-a1-source-v8.zip'
       - '.github/workflows/build-ipa.yml'
 jobs:
   ios:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Unpack app source
-        run: unzip -oq ich-schaffe-das-a1-source-v7.zip
+        run: unzip -oq ich-schaffe-das-a1-source-v8.zip
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -44,9 +44,9 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/
           cd build/ipa
-          zip -qry Ich-schaffe-das-A1-v7-unsigned.ipa Payload
-          unzip -tq Ich-schaffe-das-A1-v7-unsigned.ipa
+          zip -qry Ich-schaffe-das-A1-v8-unsigned.ipa Payload
+          unzip -tq Ich-schaffe-das-A1-v8-unsigned.ipa
       - uses: actions/upload-artifact@v5
         with:
-          name: ich-schaffe-das-a1-v7-unsigned-ipa
-          path: learning_app/build/ipa/Ich-schaffe-das-A1-v7-unsigned.ipa
+          name: ich-schaffe-das-a1-v8-unsigned-ipa
+          path: learning_app/build/ipa/Ich-schaffe-das-A1-v8-unsigned.ipa

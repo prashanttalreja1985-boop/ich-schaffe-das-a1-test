@@ -18,11 +18,18 @@ The app lessons use original instructional wording and examples rather than copi
 
 ## Install the test IPA
 
-Open the [v7 build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v7-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v7-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
+Open the [v8 build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v8-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v8-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
 
 ## Source and database
 
-The [v7 source ZIP](ich-schaffe-das-a1-source-v7.zip) contains the Flutter app, separately bundled A1 and A1+ Revision courses, Shorts catalog, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. The IPA reads the published course and lexicon from Supabase, falls back to bundled data offline, and uses no account screen. Progress syncs anonymously when available and otherwise stays on the device.
+The [v8 source ZIP](ich-schaffe-das-a1-source-v8.zip) contains the Flutter app, separately bundled A1 and A1+ Revision courses, Shorts catalog, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. The IPA reads the published course and lexicon from Supabase, falls back to bundled data offline, and uses no account screen. Progress syncs anonymously when available and otherwise stays on the device.
+
+## Card interactions
+
+Cards show both the lesson number and the card's position within that lesson.
+Long-press an amber noun or green verb to open its meaning in a dark green
+popover near the word. Tapping a word in a quiz option still selects the option.
+Vertical swipes over a Shorts video advance or return to the adjacent card.
 
 ## Content review flags
 
