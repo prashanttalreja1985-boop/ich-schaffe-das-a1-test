@@ -12,5 +12,5 @@ Google OAuth is currently in test mode and only Google accounts listed as test u
 
 ## Install this test build
 
-Open the [GitHub Actions build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), download the newest successful `ich-schaffe-das-a1-v23-unsigned-ipa` artifact, unzip it, and select `Ich-schaffe-das-A1-v23-unsigned.ipa` in Sideloadly. The [v23 source archive](ich-schaffe-das-a1-source-v23.zip) contains the app and database migrations.
+Open the [GitHub Actions build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), download the newest successful `ich-schaffe-das-a1-v24-unsigned-ipa` artifact, unzip it, and select `Ich-schaffe-das-A1-v24-unsigned.ipa` in Sideloadly. The [v24 source archive](ich-schaffe-das-a1-source-v24.zip) contains the app and database migrations.
 
