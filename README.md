@@ -23,3 +23,11 @@ Open the [v7 build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-
 ## Source and database
 
 The [v7 source ZIP](ich-schaffe-das-a1-source-v7.zip) contains the Flutter app, separately bundled A1 and A1+ Revision courses, Shorts catalog, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. The IPA reads the published course and lexicon from Supabase, falls back to bundled data offline, and uses no account screen. Progress syncs anonymously when available and otherwise stays on the device.
+
+## Content review flags
+
+Every lesson card has a flag button. Flags are saved on the device for the
+current profile and sent to `learning_content_flags` in Deutsch without requiring
+a learner login. Supabase stores one open review item per course activity with
+its flag time and an `open` or `fixed` status. If the network is unavailable,
+the app keeps the local flag and reports that it could not sync.
