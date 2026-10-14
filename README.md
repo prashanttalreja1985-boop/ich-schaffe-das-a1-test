@@ -10,6 +10,10 @@ Enter a profile name the first time, or tap a saved name to continue. Selecting 
 
 Enter comma-separated interests such as travel, football, or cooking. At session start the app searches YouTube for embeddable short videos tagged with those interests, then queues the results. Four videos open the session automatically; after every four learning cards a Short or game appears. With both modes on, each lesson has at most four game breaks. No search or video selection is needed during a break. The API search covers videos under four minutes and does not guarantee every result is a YouTube Short. Some creators may still prevent in-app playback. If the search service is unavailable, the app uses its small bundled catalog. The YouTube API key is supplied to the build through a GitHub Actions secret and restricted to this iOS bundle ID and the YouTube Data API; it is not stored in the public source ZIP.
 
+## Points and settings
+
+Tap the initial on a lesson card to open monthly leaders, profile selection, YouTube and game settings, or return home. Changing profiles resumes its first unfinished A1 card. Each completed learning card earns one point. A quiz earns two points for a correct first tap, one for a correct second tap, and zero after that. Deutsch stores one award per activity and displays lifetime, current-month, and A1-level totals for the saved profiles on this install.
+
 ## Games
 
 The Games section contains two puzzles with 20 levels each: a wooden-plank escape puzzle and the Lines color-race puzzle. With Games enabled, each lesson includes up to four game breaks, spread across its cards. The game uses saved profile progress to unlock levels in order; progress is stored locally and synced to the Deutsch project when anonymous Supabase access is available.
@@ -22,11 +26,11 @@ The app lessons use original instructional wording and examples rather than copi
 
 ## Install the test IPA
 
-Open the [IPA build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v17-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v17-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
+Open the [IPA build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v18-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v18-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
 
 ## Source and database
 
-The [v17 source ZIP](ich-schaffe-das-a1-source-v17.zip) contains the Flutter app, 10-lesson A1 and separate A1+ Revision courses, automatic Shorts, games, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. Card completion and quiz attempts use `learner_activity_progress` and `learner_answers`. `learner_game_progress` keeps each profile's highest unlocked level for each puzzle. All learner tables use RLS by anonymous Supabase user ID. The IPA reads published lessons and the lexicon from Supabase, falls back to bundled course data offline, and has no account screen. Anonymous progress is tied to that app install; it does not transfer to another device.
+The [v18 source ZIP](ich-schaffe-das-a1-source-v18.zip) contains the Flutter app, 10-lesson A1 and separate A1+ Revision courses, automatic Shorts, games, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. Card completion and quiz attempts use `learner_activity_progress` and `learner_answers`. `learner_game_progress` keeps each profile's highest unlocked level for each puzzle. All learner tables use RLS by anonymous Supabase user ID. The IPA reads published lessons and the lexicon from Supabase, falls back to bundled course data offline, and has no account screen. Anonymous progress is tied to that app install; it does not transfer to another device.
 
 ## Card interactions
 
