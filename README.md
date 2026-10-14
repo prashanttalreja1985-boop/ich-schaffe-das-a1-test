@@ -1,52 +1,16 @@
-# Ich schaffe das — German A1 iPhone test app
+# Ich schaffe das — iPhone A1 test app
 
-A swipe-up course with grammar explanations, vocabulary practice, and quizzes. On an unfinished lesson card, swiping up marks it complete and advances. Quiz cards require a correct answer. Google sign-in is optional, and no AI is used while studying.
+This Flutter app opens on a dark Google sign-in page. Google sign-in and sign-up use the same OAuth button. After authentication, a new account begins at A1 lesson 1; a returning account opens its first unfinished card. Completing A1 automatically opens the separate A1+ Revision course. There is no home screen, local profile picker, anonymous session, or AI call during study.
 
-## Google sign-in
+The learner's Supabase Auth UUID is the key for completed cards, quiz attempts, game levels, points, and device preferences. Supabase's `learner_activity_progress`, `learner_answers`, `learner_game_progress`, and `learner_score_events` tables hold progress. The legacy `learner_profiles` table has been removed. A one-time device migration clears old named-profile progress and settings. Existing anonymous accounts and their progress were deleted from Deutsch before this release.
 
-The Home and in-course settings now have a Google account section. It opens Google's external sign-in page and returns to the app through a registered iPhone link. Existing anonymous progress can link to Google without changing its Supabase user ID. Saved profile names also sync under the account, so another installation can list them. This OAuth client is in a dedicated Google Cloud test project; the secret stays in Deutsch Supabase and is not packaged in the IPA. Google currently permits the project owner's account as a test user. YouTube Shorts remain keyword based; Google sign-in does not expose a personalized Shorts feed.
+Tap the initial at the top right of a card for settings, monthly leaders, personal points, YouTube interests, game settings, and sign-out. Four Shorts open each session when enabled. After every four learning cards a Short or game appears, with up to four game breaks per lesson. The wooden-plank and Lines puzzles each have 20 levels. Shorts are found through keyword search using the YouTube Data API key injected by the build; the key is not in this source archive. The Google OAuth secret stays in Deutsch Supabase.
 
-## Home screen and progress
+A1 contains 10 topic-based lessons with 1,406 activities. A1+ Revision contains 14 lessons with 145 activities, bundled in the IPA as a continuation. Book, lesson, and activity rows use IDs, sequence numbers, content kinds, and JSON payloads; each kind uses a preset card renderer. The app reads published content and the lexicon from Deutsch Supabase and uses bundled content offline. A1+ is currently a draft database book, so its bundled copy is used until publication.
 
-Enter a profile name the first time, or tap a saved name to continue. Selecting a saved profile shows **Reset selected profile progress**; after confirmation this clears lesson completions, quiz attempts, and puzzle levels on-device and in Supabase while keeping profile settings. If offline, the cloud reset is retried before progress is restored. YouTube and Games settings are in separate collapsible sections. The app saves preferences separately for each profile. A1 is the only available course at first, with 10 topic-based lessons, 1,406 activities, and 402 vocabulary entries. Lessons cover introductions and sounds; people, nouns and articles; verbs and routines; time and appointments; food, shopping and home; city and travel; work and plans; clothes, health and weather; past events and writing; and requests plus a full review. A1+ Revision is a separate continuation with 14 lessons, 145 activities, and 208 vocabulary entries. It stays greyed out until that profile completes A1; it does not duplicate the A1 lesson set.
+Google OAuth is currently in test mode and only Google accounts listed as test users in its Cloud project can authenticate. The OAuth redirect is `de.ichschaffedas.a1://login-callback/`. This IPA is unsigned for Sideloadly to sign with the installer's Apple ID. To add Facebook or Apple later, enable their Supabase providers and expand the sign-in gate; the account-based progress schema is already suitable.
 
-## YouTube Reels
+## Install this test build
 
-Enter comma-separated interests such as travel, football, or cooking. At session start the app searches YouTube for embeddable short videos tagged with those interests, then queues the results. Four videos open the session automatically; after every four learning cards a Short or game appears. With both modes on, each lesson has at most four game breaks. No search or video selection is needed during a break. The API search covers videos under four minutes and does not guarantee every result is a YouTube Short. Some creators may still prevent in-app playback. If the search service is unavailable, the app uses its small bundled catalog. The YouTube API key is supplied to the build through a GitHub Actions secret and restricted to this iOS bundle ID and the YouTube Data API; it is not stored in the public source ZIP.
+Open the [GitHub Actions build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), download the newest successful `ich-schaffe-das-a1-v21-unsigned-ipa` artifact, unzip it, and select `Ich-schaffe-das-A1-v21-unsigned.ipa` in Sideloadly. The [v21 source archive](ich-schaffe-das-a1-source-v21.zip) contains the app and database migrations.
 
-## Points and settings
-
-Tap the initial on a lesson card to open monthly leaders, profile selection, YouTube and game settings, or return home. Changing profiles resumes its first unfinished A1 card. Each completed learning card earns one point. A quiz earns two points for a correct first tap, one for a correct second tap, and zero after that. Deutsch stores one award per activity and displays lifetime, current-month, and A1-level totals for the saved profiles on this install.
-
-## Games
-
-The Games section contains two puzzles with 20 levels each: a wooden-plank escape puzzle and the Lines color-race puzzle. With Games enabled, each lesson includes up to four game breaks, spread across its cards. The game uses saved profile progress to unlock levels in order; progress is stored locally and synced to the Deutsch project when anonymous Supabase access is available.
-
-## A1+ Revision transcript coverage
-
-The longer [A1+ video](https://www.youtube.com/watch?v=-KdGfbgL6sg) transcript supplied for this build contains 868 timestamp markers. The source archive maps every marker in order across 14 revision lessons. Lessons review and extend pronunciation and greetings; articles, gender, plurals, numbers and dates; present tense and sentence order; questions, negation and time; modal and separable verbs; past forms and Perfekt; accusative and possessives; dative and prepositions; comparisons and demonstratives; imperatives; and everyday themes including routines, cafés, housing, work, travel, shopping, clothing, weather and health.
-
-The app lessons use original instructional wording and examples rather than copied transcript text. Timestamp mapping verifies chapter placement; it is not a word-for-word transcript audit. The supplied [A1 video](https://www.youtube.com/watch?v=0emzztSmKjA) also has a minute-by-minute coverage map. The course is not a reproduction of Netzwerk neu A1; checking exact textbook coverage still requires the materials. Listening and speaking assessment are still pending.
-
-## Install the test IPA
-
-Open the [IPA build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v20-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v20-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
-
-## Source and database
-
-The [v20 source ZIP](ich-schaffe-das-a1-source-v20.zip) contains the Flutter app, 10-lesson A1 and separate A1+ Revision courses, automatic Shorts, games, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. Card completion and quiz attempts use `learner_activity_progress` and `learner_answers`. `learner_game_progress` keeps each profile's highest unlocked level for each puzzle. All learner tables use RLS by Supabase user ID. The IPA reads published lessons and the lexicon from Supabase and falls back to bundled course data offline. Anonymous progress stays on that install until the identity is linked to Google.
-
-## Card interactions
-
-Cards show both the lesson number and the card's position within that lesson.
-Long-press an amber noun or green verb to open its meaning in a dark green
-popover near the word. Tapping a word in a quiz option still selects the option.
-Vertical swipes over a Shorts video advance or return to the adjacent card.
-
-## Content review flags
-
-Every lesson card has a flag button. Flags are saved on the device for the
-current profile and sent to `learning_content_flags` in Deutsch without requiring
-a learner login. Supabase stores one open review item per course activity with
-its flag time and an `open` or `fixed` status. If the network is unavailable,
-the app keeps the local flag and reports that it could not sync.
