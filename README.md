@@ -1,6 +1,10 @@
 # Ich schaffe das — German A1 iPhone test app
 
-A swipe-up course with grammar explanations, vocabulary practice, and quizzes. On an unfinished lesson card, swiping up marks it complete and advances. Quiz cards require a correct answer. There is no login and no AI is used while studying.
+A swipe-up course with grammar explanations, vocabulary practice, and quizzes. On an unfinished lesson card, swiping up marks it complete and advances. Quiz cards require a correct answer. Google sign-in is optional, and no AI is used while studying.
+
+## Google sign-in
+
+The Home and in-course settings now have a Google account section. It opens Google's external sign-in page and returns to the app through a registered iPhone link. Existing anonymous progress can link to Google without changing its Supabase user ID. Saved profile names also sync under the account, so another installation can list them. This OAuth client is in a dedicated Google Cloud test project; the secret stays in Deutsch Supabase and is not packaged in the IPA. Google currently permits the project owner's account as a test user. YouTube Shorts remain keyword based; Google sign-in does not expose a personalized Shorts feed.
 
 ## Home screen and progress
 
@@ -26,11 +30,11 @@ The app lessons use original instructional wording and examples rather than copi
 
 ## Install the test IPA
 
-Open the [IPA build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v19-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v19-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
+Open the [IPA build](https://github.com/prashanttalreja1985-boop/ich-schaffe-das-a1-test/actions/workflows/build-ipa.yml), choose the newest successful run, and download the `ich-schaffe-das-a1-v20-unsigned-ipa` artifact. Unzip it, then select `Ich-schaffe-das-A1-v20-unsigned.ipa` in Sideloadly. Sideloadly signs this unsigned test IPA with your Apple ID for installation.
 
 ## Source and database
 
-The [v19 source ZIP](ich-schaffe-das-a1-source-v19.zip) contains the Flutter app, 10-lesson A1 and separate A1+ Revision courses, automatic Shorts, games, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. Card completion and quiz attempts use `learner_activity_progress` and `learner_answers`. `learner_game_progress` keeps each profile's highest unlocked level for each puzzle. All learner tables use RLS by anonymous Supabase user ID. The IPA reads published lessons and the lexicon from Supabase, falls back to bundled course data offline, and has no account screen. Anonymous progress is tied to that app install; it does not transfer to another device.
+The [v20 source ZIP](ich-schaffe-das-a1-source-v20.zip) contains the Flutter app, 10-lesson A1 and separate A1+ Revision courses, automatic Shorts, games, coverage maps, lexicon, validation code, Supabase schema, and content importers. Course data uses `learning_books`, `learning_lessons`, and `learning_activities`; each activity has its own ID, lesson ID, `sequence_number`, `kind`, and JSON payload. The app selects its preset grammar, vocabulary, or quiz card by `kind`. Noun and verb meanings and forms are stored per book slug in `learning_lexicon`. A1 is published in the **Deutsch** Supabase project; the separate A1+ course remains a draft. Card completion and quiz attempts use `learner_activity_progress` and `learner_answers`. `learner_game_progress` keeps each profile's highest unlocked level for each puzzle. All learner tables use RLS by anonymous Supabase user ID. The IPA reads published lessons and the lexicon from Supabase, falls back to bundled course data offline, and has no account screen. Anonymous progress is tied to that app install; it does not transfer to another device.
 
 ## Card interactions
 
