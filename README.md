@@ -8,7 +8,7 @@ Enter a profile name the first time, or tap a saved name to continue. The app sa
 
 ## YouTube Reels
 
-Enter comma-separated interests such as travel, football, or cooking. The toggle controls whether a session includes videos. With Reels enabled, sessions begin with three bundled public YouTube Shorts; another appears after every four learning cards. Only videos matching an entered interest are shown. An empty interest list or a keyword with no catalog match shows no videos, so the app will not fall back to German-learning clips. Videos play inside the card. They may repeat, and some creators prevent embedding. This is a small test catalog, not your YouTube feed or a live keyword search. No YouTube account or API key is needed.
+Enter comma-separated interests such as travel, football, or cooking. The toggle controls whether a session includes videos. With Reels enabled, up to three matching Shorts appear at the start; another appears after every four learning cards while matching videos remain. Only videos matching an entered interest are shown. An empty interest list or a keyword with no catalog match shows no videos, so the app will not fall back to German-learning clips. Videos play inside the card. They may repeat, and some creators prevent embedding. This is a small test catalog, not your YouTube feed or a live keyword search. No YouTube account or API key is needed.
 
 ## A1+ Revision transcript coverage
 
