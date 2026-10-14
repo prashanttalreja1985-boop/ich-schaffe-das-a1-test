@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'ich-schaffe-das-a1-source-v6.zip'
+      - 'ich-schaffe-das-a1-source-v7.zip'
       - '.github/workflows/build-ipa.yml'
 jobs:
   ios:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Unpack app source
-        run: unzip -q ich-schaffe-das-a1-source-v6.zip
+        run: unzip -q ich-schaffe-das-a1-source-v7.zip
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -22,12 +22,21 @@ jobs:
       - name: Validate course and video coverage
         working-directory: learning_app
         run: node tool/validate_course.js
+      - name: Generate and validate lexical reference
+        working-directory: learning_app
+        run: node tool/build_lexicon.js
+      - name: Analyze
+        working-directory: learning_app
+        run: flutter analyze
       - name: Test
         working-directory: learning_app
         run: flutter test
       - name: Build unsigned iOS app
         working-directory: learning_app
-        run: flutter build ios --release --no-codesign
+        env:
+          SUPABASE_URL: https://sxfgtggqmloiwiayfqpv.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_8OiunRfPrpAW09gv1gN30g_xwXfGOga
+        run: flutter build ios --release --no-codesign --dart-define="SUPABASE_URL=$SUPABASE_URL" --dart-define="SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY"
       - name: Package unsigned IPA
         working-directory: learning_app
         run: |
@@ -35,9 +44,9 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/
           cd build/ipa
-          zip -qry Ich-schaffe-das-A1-v6-unsigned.ipa Payload
-          unzip -tq Ich-schaffe-das-A1-v6-unsigned.ipa
+          zip -qry Ich-schaffe-das-A1-v7-unsigned.ipa Payload
+          unzip -tq Ich-schaffe-das-A1-v7-unsigned.ipa
       - uses: actions/upload-artifact@v5
         with:
-          name: ich-schaffe-das-a1-v6-unsigned-ipa
-          path: learning_app/build/ipa/Ich-schaffe-das-A1-v6-unsigned.ipa
+          name: ich-schaffe-das-a1-v7-unsigned-ipa
+          path: learning_app/build/ipa/Ich-schaffe-das-A1-v7-unsigned.ipa
