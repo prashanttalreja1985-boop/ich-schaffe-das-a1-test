@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'ich-schaffe-das-a1-source-v14.zip'
+      - 'ich-schaffe-das-a1-source-v15.zip'
       - '.github/workflows/build-ipa.yml'
 jobs:
   ios:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Unpack app source
-        run: unzip -oq ich-schaffe-das-a1-source-v14.zip
+        run: unzip -oq ich-schaffe-das-a1-source-v15.zip
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -36,6 +36,23 @@ jobs:
       - name: Test
         working-directory: learning_app
         run: flutter test
+      - name: Verify YouTube Shorts search
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          test -n "$YOUTUBE_API_KEY"
+          curl --fail-with-body --silent --show-error --get \
+            -H "X-Goog-Api-Key: $YOUTUBE_API_KEY" \
+            -H "X-Ios-Bundle-Identifier: de.ichschaffedas.a1" \
+            --data-urlencode 'part=snippet' \
+            --data-urlencode 'q=#travel #shorts' \
+            --data-urlencode 'type=video' \
+            --data-urlencode 'videoDuration=short' \
+            --data-urlencode 'videoEmbeddable=true' \
+            --data-urlencode 'maxResults=5' \
+            https://www.googleapis.com/youtube/v3/search \
+            -o /tmp/ich-schaffe-das-shorts-search.json
+          python3 -c "import json; d=json.load(open('/tmp/ich-schaffe-das-shorts-search.json')); assert d.get('items'), 'No embeddable videos found'; print('YouTube search returned',len(d['items']),'videos')"
       - name: Build unsigned iOS app
         working-directory: learning_app
         env:
@@ -50,9 +67,9 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/
           cd build/ipa
-          zip -qry Ich-schaffe-das-A1-v14-unsigned.ipa Payload
-          unzip -tq Ich-schaffe-das-A1-v14-unsigned.ipa
+          zip -qry Ich-schaffe-das-A1-v15-unsigned.ipa Payload
+          unzip -tq Ich-schaffe-das-A1-v15-unsigned.ipa
       - uses: actions/upload-artifact@v5
         with:
-          name: ich-schaffe-das-a1-v14-unsigned-ipa
-          path: learning_app/build/ipa/Ich-schaffe-das-A1-v14-unsigned.ipa
+          name: ich-schaffe-das-a1-v15-unsigned-ipa
+          path: learning_app/build/ipa/Ich-schaffe-das-A1-v15-unsigned.ipa
