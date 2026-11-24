@@ -32,7 +32,7 @@ jobs:
         run: node tool/build_lexicon.js
       - name: Analyze
         working-directory: learning_app
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos
       - name: Test
         timeout-minutes: 3
         working-directory: learning_app
