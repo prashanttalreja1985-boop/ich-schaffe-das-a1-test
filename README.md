@@ -1,5 +1,7 @@
 # Ich schaffe das — A1 test IPA
 
+v36: Reset opens the first teaching card, portrait photos fill a square frame, and iOS Vision places lightweight talking lips on detected faces. Teaching cards speak on arrival; quiz feedback speaks after an answer. Download the unsigned IPA from the latest successful Actions run and sign it with Sideloadly.
+
 This iPhone test app signs in with Google and opens the learner's first unfinished A1 card. Completing A1 opens the separate A1+ revision course. Existing lesson text, vocabulary, quizzes, answers, flags, and scoring remain in place.
 
 Cards 1–20 have friendly teacher explanations generated once with the existing ClipStudio Kokoro worker. They play automatically and offer pause, replay, and a written transcript. Six supplied portraits rotate across the cards; a small four-shape mouth overlay moves while the teacher audio plays. The portrait map supports additional images and per-card assignments without generating animation files. The previous cutout animations, YouTube Shorts, and games are removed from the app. The teacher audio and portraits are bundled, so playback does not call an AI service.
