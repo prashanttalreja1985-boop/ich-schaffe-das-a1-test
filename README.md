@@ -1,6 +1,6 @@
 # Ich schaffe das — A1 test IPA
 
-v36: Reset opens the first teaching card, portrait photos fill a square frame, and iOS Vision places lightweight talking lips on detected faces. Teaching cards speak on arrival; quiz feedback speaks after an answer. Download the unsigned IPA from the latest successful Actions run and sign it with Sideloadly.
+v37: Twenty short Kokoro teaching prompts and fifteen recorded reactions; reset returns to Lesson 1 Card 1, and only the dark mouth opening moves. Download the unsigned IPA from the latest successful Actions run and sign it with Sideloadly.
 
 This iPhone test app signs in with Google and opens the learner's first unfinished A1 card. Completing A1 opens the separate A1+ revision course. Existing lesson text, vocabulary, quizzes, answers, flags, and scoring remain in place.
 
